@@ -1,0 +1,232 @@
+CalComp capture 20261016-200836  port=/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0 baud=9600
+
+init comm_setup     sent '\\x1b%C1N81\\x0d'        0 packets, other ''
+init origin_ul      sent '\\x1b%L1\\x0d'           0 packets, other ''
+init binary_fmt     sent '\\x1b%^23\\x0d'          0 packets, other ''
+init x_increment    sent '\\x1b%X1\\x0d'           0 packets, other ''
+init y_increment    sent '\\x1b%Y1\\x0d'           0 packets, other ''
+init res_1000lpi    sent '\\x1b%JR1000,0\\x0d'     0 packets, other ''
+init stream_mode    sent '\\x1b%IR\\x0d'           0 packets, other ''
+init pressure_off   sent '\\x1b%VA0\\x0d'          0 packets, other ''
+init firmware_id    sent '\\x1b%__V\\x0d'          0 packets, other '70171A 07/14/94 16906-4\\x0d\\x0a'
+init product_id     sent '\\x1b%__p\\x0d'          0 packets, other 'CalComp 3400\\x0d\\x0a'
+init max_coords     sent '\\x1b%VS\\x0d'           1 packets, other ''
+init absolute_mode  sent '\\x1b%IR\\x0d'           0 packets, other ''
+
+== idle ==
+Keep the pen and puck well away from the tablet (nothing should be sent).
+  {"bytes": 0, "format": "none", "packets": 0, "junk_bytes": 0}
+
+== puck_hover ==
+Put the 16-button PUCK on the tablet center; don't press any button. (If it's asleep, wake it with one button press BEFORE pressing Enter.)
+  {"bytes": 0, "format": "none", "packets": 0, "junk_bytes": 0}
+
+== puck_move ==
+Slide the PUCK slowly around the tablet without pressing buttons.
+  {"bytes": 4632, "format": "binary", "packets": 772, "junk_bytes": 0, "x_range": [2589, 13881], "y_range": [2082, 8825], "b1_values": ["10000000"], "b4_high_bits": ["0000"], "btn_field_values": [0], "flag16_values": [false]}
+  80 3d 16 00 34 20  b1=10000000 b4=00000000 x=  7830 y=  6688 btn= 0 16btn=0
+  80 3d 1c 00 34 26  b1=10000000 b4=00000000 x=  7836 y=  6694 btn= 0 16btn=0
+  80 3d 23 00 34 2d  b1=10000000 b4=00000000 x=  7843 y=  6701 btn= 0 16btn=0
+  80 3d 29 00 34 34  b1=10000000 b4=00000000 x=  7849 y=  6708 btn= 0 16btn=0
+  80 3d 36 00 34 41  b1=10000000 b4=00000000 x=  7862 y=  6721 btn= 0 16btn=0
+  80 3d 3c 00 34 48  b1=10000000 b4=00000000 x=  7868 y=  6728 btn= 0 16btn=0
+  80 3e 1c 00 35 17  b1=10000000 b4=00000000 x=  7964 y=  6807 btn= 0 16btn=0
+  80 3e 27 00 35 1f  b1=10000000 b4=00000000 x=  7975 y=  6815 btn= 0 16btn=0
+  ...
+  80 32 2f 00 2e 1f  b1=10000000 b4=00000000 x=  6447 y=  5919 btn= 0 16btn=0
+  80 32 2e 00 2e 0c  b1=10000000 b4=00000000 x=  6446 y=  5900 btn= 0 16btn=0
+  80 32 16 00 25 2a  b1=10000000 b4=00000000 x=  6422 y=  4778 btn= 0 16btn=0
+  80 32 1a 00 25 2c  b1=10000000 b4=00000000 x=  6426 y=  4780 btn= 0 16btn=0
+  80 32 1d 00 25 27  b1=10000000 b4=00000000 x=  6429 y=  4775 btn= 0 16btn=0
+  80 32 21 00 25 27  b1=10000000 b4=00000000 x=  6433 y=  4775 btn= 0 16btn=0
+  80 32 27 00 25 2c  b1=10000000 b4=00000000 x=  6439 y=  4780 btn= 0 16btn=0
+  80 32 2c 00 25 29  b1=10000000 b4=00000000 x=  6444 y=  4777 btn= 0 16btn=0
+
+== puck_btn_0 ==
+Hold the PUCK still and press button '0'; hold it, release, press it again.
+  {"bytes": 5226, "format": "binary", "packets": 871, "junk_bytes": 0, "x_range": [7143, 7146], "y_range": [4688, 4782], "b1_values": ["10000000", "11000000"], "b4_high_bits": ["0000"], "btn_field_values": [0, 16], "flag16_values": [false, true]}
+  80 37 67 00 24 6a  b1=10000000 b4=00000000 x=  7143 y=  4714 btn= 0 16btn=0
+  80 37 67 00 24 76  b1=10000000 b4=00000000 x=  7143 y=  4726 btn= 0 16btn=0
+  80 37 67 00 25 01  b1=10000000 b4=00000000 x=  7143 y=  4737 btn= 0 16btn=0
+  80 37 67 00 24 7e  b1=10000000 b4=00000000 x=  7143 y=  4734 btn= 0 16btn=0
+  80 37 67 00 25 11  b1=10000000 b4=00000000 x=  7143 y=  4753 btn= 0 16btn=0
+  80 37 67 00 25 03  b1=10000000 b4=00000000 x=  7143 y=  4739 btn= 0 16btn=0
+  80 37 67 00 25 10  b1=10000000 b4=00000000 x=  7143 y=  4752 btn= 0 16btn=0
+  80 37 67 00 25 09  b1=10000000 b4=00000000 x=  7143 y=  4745 btn= 0 16btn=0
+  ...
+  c0 37 6a 00 24 73  b1=11000000 b4=00000000 x=  7146 y=  4723 btn=16 16btn=1
+  c0 37 6a 00 24 77  b1=11000000 b4=00000000 x=  7146 y=  4727 btn=16 16btn=1
+  c0 37 6a 00 24 7e  b1=11000000 b4=00000000 x=  7146 y=  4734 btn=16 16btn=1
+  c0 37 6a 00 25 0b  b1=11000000 b4=00000000 x=  7146 y=  4747 btn=16 16btn=1
+  c0 37 6a 00 24 7b  b1=11000000 b4=00000000 x=  7146 y=  4731 btn=16 16btn=1
+  c0 37 6a 00 24 7e  b1=11000000 b4=00000000 x=  7146 y=  4734 btn=16 16btn=1
+  c0 37 6a 00 25 09  b1=11000000 b4=00000000 x=  7146 y=  4745 btn=16 16btn=1
+  c0 37 6a 00 25 00  b1=11000000 b4=00000000 x=  7146 y=  4736 btn=16 16btn=1
+
+== puck_btn_1 ==
+Hold the PUCK still and press button '1'; hold it, release, press it again.
+  {"bytes": 4314, "format": "binary", "packets": 719, "junk_bytes": 0, "x_range": [7144, 7146], "y_range": [4687, 4804], "b1_values": ["10000000", "11000100"], "b4_high_bits": ["0000"], "btn_field_values": [0, 17], "flag16_values": [false, true]}
+  80 37 69 00 24 7b  b1=10000000 b4=00000000 x=  7145 y=  4731 btn= 0 16btn=0
+  80 37 69 00 25 09  b1=10000000 b4=00000000 x=  7145 y=  4745 btn= 0 16btn=0
+  80 37 69 00 24 68  b1=10000000 b4=00000000 x=  7145 y=  4712 btn= 0 16btn=0
+  80 37 69 00 24 7b  b1=10000000 b4=00000000 x=  7145 y=  4731 btn= 0 16btn=0
+  80 37 69 00 24 6f  b1=10000000 b4=00000000 x=  7145 y=  4719 btn= 0 16btn=0
+  80 37 69 00 25 11  b1=10000000 b4=00000000 x=  7145 y=  4753 btn= 0 16btn=0
+  80 37 69 00 24 7b  b1=10000000 b4=00000000 x=  7145 y=  4731 btn= 0 16btn=0
+  80 37 69 00 24 79  b1=10000000 b4=00000000 x=  7145 y=  4729 btn= 0 16btn=0
+  ...
+  80 37 69 00 25 02  b1=10000000 b4=00000000 x=  7145 y=  4738 btn= 0 16btn=0
+  80 37 69 00 24 7b  b1=10000000 b4=00000000 x=  7145 y=  4731 btn= 0 16btn=0
+  80 37 69 00 24 79  b1=10000000 b4=00000000 x=  7145 y=  4729 btn= 0 16btn=0
+  80 37 69 00 25 10  b1=10000000 b4=00000000 x=  7145 y=  4752 btn= 0 16btn=0
+  80 37 69 00 25 09  b1=10000000 b4=00000000 x=  7145 y=  4745 btn= 0 16btn=0
+  80 37 69 00 25 0d  b1=10000000 b4=00000000 x=  7145 y=  4749 btn= 0 16btn=0
+  80 37 69 00 25 06  b1=10000000 b4=00000000 x=  7145 y=  4742 btn= 0 16btn=0
+  80 37 69 00 25 09  b1=10000000 b4=00000000 x=  7145 y=  4745 btn= 0 16btn=0
+
+== puck_btn_2 ==
+Hold the PUCK still and press button '2'; hold it, release, press it again.
+  {"bytes": 3366, "format": "binary", "packets": 561, "junk_bytes": 0, "x_range": [7145, 7146], "y_range": [4664, 4773], "b1_values": ["10000000", "11001000"], "b4_high_bits": ["0000"], "btn_field_values": [0, 18], "flag16_values": [false, true]}
+  80 37 6a 00 24 78  b1=10000000 b4=00000000 x=  7146 y=  4728 btn= 0 16btn=0
+  80 37 6a 00 25 07  b1=10000000 b4=00000000 x=  7146 y=  4743 btn= 0 16btn=0
+  80 37 6a 00 25 15  b1=10000000 b4=00000000 x=  7146 y=  4757 btn= 0 16btn=0
+  80 37 6a 00 24 69  b1=10000000 b4=00000000 x=  7146 y=  4713 btn= 0 16btn=0
+  80 37 6a 00 25 0a  b1=10000000 b4=00000000 x=  7146 y=  4746 btn= 0 16btn=0
+  80 37 6a 00 24 61  b1=10000000 b4=00000000 x=  7146 y=  4705 btn= 0 16btn=0
+  80 37 6a 00 24 6c  b1=10000000 b4=00000000 x=  7146 y=  4716 btn= 0 16btn=0
+  80 37 6a 00 24 78  b1=10000000 b4=00000000 x=  7146 y=  4728 btn= 0 16btn=0
+  ...
+  80 37 69 00 24 60  b1=10000000 b4=00000000 x=  7145 y=  4704 btn= 0 16btn=0
+  80 37 69 00 24 7d  b1=10000000 b4=00000000 x=  7145 y=  4733 btn= 0 16btn=0
+  80 37 69 00 25 02  b1=10000000 b4=00000000 x=  7145 y=  4738 btn= 0 16btn=0
+  80 37 69 00 24 7f  b1=10000000 b4=00000000 x=  7145 y=  4735 btn= 0 16btn=0
+  80 37 69 00 25 0c  b1=10000000 b4=00000000 x=  7145 y=  4748 btn= 0 16btn=0
+  80 37 69 00 25 05  b1=10000000 b4=00000000 x=  7145 y=  4741 btn= 0 16btn=0
+  80 37 69 00 24 7b  b1=10000000 b4=00000000 x=  7145 y=  4731 btn= 0 16btn=0
+  80 37 69 00 25 02  b1=10000000 b4=00000000 x=  7145 y=  4738 btn= 0 16btn=0
+
+== puck_btn_3 ==
+Hold the PUCK still and press button '3'; hold it, release, press it again.
+  {"bytes": 6144, "format": "binary", "packets": 1024, "junk_bytes": 0, "x_range": [7145, 7147], "y_range": [4691, 4769], "b1_values": ["10000000", "11001100"], "b4_high_bits": ["0000"], "btn_field_values": [0, 19], "flag16_values": [false, true]}
+  80 37 69 00 25 07  b1=10000000 b4=00000000 x=  7145 y=  4743 btn= 0 16btn=0
+  80 37 69 00 24 76  b1=10000000 b4=00000000 x=  7145 y=  4726 btn= 0 16btn=0
+  80 37 69 00 24 7a  b1=10000000 b4=00000000 x=  7145 y=  4730 btn= 0 16btn=0
+  80 37 69 00 24 7d  b1=10000000 b4=00000000 x=  7145 y=  4733 btn= 0 16btn=0
+  80 37 69 00 25 04  b1=10000000 b4=00000000 x=  7145 y=  4740 btn= 0 16btn=0
+  80 37 6a 00 24 7d  b1=10000000 b4=00000000 x=  7146 y=  4733 btn= 0 16btn=0
+  80 37 6a 00 24 71  b1=10000000 b4=00000000 x=  7146 y=  4721 btn= 0 16btn=0
+  80 37 6a 00 25 05  b1=10000000 b4=00000000 x=  7146 y=  4741 btn= 0 16btn=0
+  ...
+  cc 37 6a 00 24 73  b1=11001100 b4=00000000 x=  7146 y=  4723 btn=19 16btn=1
+  cc 37 6a 00 24 76  b1=11001100 b4=00000000 x=  7146 y=  4726 btn=19 16btn=1
+  cc 37 6a 00 24 7c  b1=11001100 b4=00000000 x=  7146 y=  4732 btn=19 16btn=1
+  cc 37 6a 00 25 03  b1=11001100 b4=00000000 x=  7146 y=  4739 btn=19 16btn=1
+  cc 37 6a 00 25 06  b1=11001100 b4=00000000 x=  7146 y=  4742 btn=19 16btn=1
+  cc 37 6a 00 25 0e  b1=11001100 b4=00000000 x=  7146 y=  4750 btn=19 16btn=1
+  80 37 6a 00 25 05  b1=10000000 b4=00000000 x=  7146 y=  4741 btn= 0 16btn=0
+  80 37 6a 00 25 0c  b1=10000000 b4=00000000 x=  7146 y=  4748 btn= 0 16btn=0
+
+== puck_btn_4 ==
+Hold the PUCK still and press button '4'; hold it, release, press it again.
+  {"bytes": 2964, "format": "binary", "packets": 494, "junk_bytes": 0, "x_range": [7145, 7146], "y_range": [4689, 4776], "b1_values": ["10000000", "11010000"], "b4_high_bits": ["0000"], "btn_field_values": [0, 20], "flag16_values": [false, true]}
+  80 37 6a 00 25 11  b1=10000000 b4=00000000 x=  7146 y=  4753 btn= 0 16btn=0
+  80 37 6a 00 24 7b  b1=10000000 b4=00000000 x=  7146 y=  4731 btn= 0 16btn=0
+  80 37 6a 00 24 75  b1=10000000 b4=00000000 x=  7146 y=  4725 btn= 0 16btn=0
+  80 37 6a 00 24 7d  b1=10000000 b4=00000000 x=  7146 y=  4733 btn= 0 16btn=0
+  80 37 6a 00 25 04  b1=10000000 b4=00000000 x=  7146 y=  4740 btn= 0 16btn=0
+  80 37 6a 00 24 7b  b1=10000000 b4=00000000 x=  7146 y=  4731 btn= 0 16btn=0
+  80 37 6a 00 25 05  b1=10000000 b4=00000000 x=  7146 y=  4741 btn= 0 16btn=0
+  80 37 6a 00 24 6c  b1=10000000 b4=00000000 x=  7146 y=  4716 btn= 0 16btn=0
+  ...
+  80 37 6a 00 24 6f  b1=10000000 b4=00000000 x=  7146 y=  4719 btn= 0 16btn=0
+  80 37 6a 00 24 7c  b1=10000000 b4=00000000 x=  7146 y=  4732 btn= 0 16btn=0
+  80 37 6a 00 24 7f  b1=10000000 b4=00000000 x=  7146 y=  4735 btn= 0 16btn=0
+  80 37 6a 00 25 00  b1=10000000 b4=00000000 x=  7146 y=  4736 btn= 0 16btn=0
+  80 37 6a 00 25 12  b1=10000000 b4=00000000 x=  7146 y=  4754 btn= 0 16btn=0
+  80 37 6a 00 25 0d  b1=10000000 b4=00000000 x=  7146 y=  4749 btn= 0 16btn=0
+  80 37 6a 00 24 79  b1=10000000 b4=00000000 x=  7146 y=  4729 btn= 0 16btn=0
+  80 37 6a 00 24 7c  b1=10000000 b4=00000000 x=  7146 y=  4732 btn= 0 16btn=0
+
+== puck_btn_5 ==
+Hold the PUCK still and press button '5'; hold it, release, press it again.
+  {"bytes": 4476, "format": "binary", "packets": 746, "junk_bytes": 0, "x_range": [7146, 7146], "y_range": [4693, 4773], "b1_values": ["10000000", "11010100"], "b4_high_bits": ["0000"], "btn_field_values": [0, 21], "flag16_values": [false, true]}
+  80 37 6a 00 25 0c  b1=10000000 b4=00000000 x=  7146 y=  4748 btn= 0 16btn=0
+  80 37 6a 00 25 03  b1=10000000 b4=00000000 x=  7146 y=  4739 btn= 0 16btn=0
+  80 37 6a 00 24 6a  b1=10000000 b4=00000000 x=  7146 y=  4714 btn= 0 16btn=0
+  80 37 6a 00 25 00  b1=10000000 b4=00000000 x=  7146 y=  4736 btn= 0 16btn=0
+  80 37 6a 00 24 70  b1=10000000 b4=00000000 x=  7146 y=  4720 btn= 0 16btn=0
+  80 37 6a 00 25 13  b1=10000000 b4=00000000 x=  7146 y=  4755 btn= 0 16btn=0
+  80 37 6a 00 25 0b  b1=10000000 b4=00000000 x=  7146 y=  4747 btn= 0 16btn=0
+  80 37 6a 00 25 06  b1=10000000 b4=00000000 x=  7146 y=  4742 btn= 0 16btn=0
+  ...
+  d4 37 6a 00 25 02  b1=11010100 b4=00000000 x=  7146 y=  4738 btn=21 16btn=1
+  d4 37 6a 00 25 05  b1=11010100 b4=00000000 x=  7146 y=  4741 btn=21 16btn=1
+  80 37 6a 00 25 02  b1=10000000 b4=00000000 x=  7146 y=  4738 btn= 0 16btn=0
+  80 37 6a 00 24 76  b1=10000000 b4=00000000 x=  7146 y=  4726 btn= 0 16btn=0
+  80 37 6a 00 25 02  b1=10000000 b4=00000000 x=  7146 y=  4738 btn= 0 16btn=0
+  80 37 6a 00 25 07  b1=10000000 b4=00000000 x=  7146 y=  4743 btn= 0 16btn=0
+  80 37 6a 00 24 7e  b1=10000000 b4=00000000 x=  7146 y=  4734 btn= 0 16btn=0
+  80 37 6a 00 24 71  b1=10000000 b4=00000000 x=  7146 y=  4721 btn= 0 16btn=0
+
+== puck_btn_6 ==
+Hold the PUCK still and press button '6'; hold it, release, press it again.
+  {"bytes": 4422, "format": "binary", "packets": 737, "junk_bytes": 0, "x_range": [7146, 7147], "y_range": [4694, 4770], "b1_values": ["10000000", "11011000"], "b4_high_bits": ["0000"], "btn_field_values": [0, 22], "flag16_values": [false, true]}
+  80 37 6a 00 25 07  b1=10000000 b4=00000000 x=  7146 y=  4743 btn= 0 16btn=0
+  80 37 6a 00 24 78  b1=10000000 b4=00000000 x=  7146 y=  4728 btn= 0 16btn=0
+  80 37 6a 00 25 06  b1=10000000 b4=00000000 x=  7146 y=  4742 btn= 0 16btn=0
+  80 37 6a 00 25 07  b1=10000000 b4=00000000 x=  7146 y=  4743 btn= 0 16btn=0
+  80 37 6a 00 25 15  b1=10000000 b4=00000000 x=  7146 y=  4757 btn= 0 16btn=0
+  80 37 6a 00 24 73  b1=10000000 b4=00000000 x=  7146 y=  4723 btn= 0 16btn=0
+  80 37 6a 00 24 7c  b1=10000000 b4=00000000 x=  7146 y=  4732 btn= 0 16btn=0
+  80 37 6a 00 24 5a  b1=10000000 b4=00000000 x=  7146 y=  4698 btn= 0 16btn=0
+  ...
+  d8 37 6a 00 25 0e  b1=11011000 b4=00000000 x=  7146 y=  4750 btn=22 16btn=1
+  d8 37 6a 00 24 7d  b1=11011000 b4=00000000 x=  7146 y=  4733 btn=22 16btn=1
+  80 37 6a 00 25 06  b1=10000000 b4=00000000 x=  7146 y=  4742 btn= 0 16btn=0
+  80 37 6a 00 25 14  b1=10000000 b4=00000000 x=  7146 y=  4756 btn= 0 16btn=0
+  80 37 6a 00 24 75  b1=10000000 b4=00000000 x=  7146 y=  4725 btn= 0 16btn=0
+  80 37 6a 00 25 0c  b1=10000000 b4=00000000 x=  7146 y=  4748 btn= 0 16btn=0
+  80 37 6a 00 25 03  b1=10000000 b4=00000000 x=  7146 y=  4739 btn= 0 16btn=0
+  80 37 6a 00 25 10  b1=10000000 b4=00000000 x=  7146 y=  4752 btn= 0 16btn=0
+
+== puck_btn_7 ==
+Hold the PUCK still and press button '7'; hold it, release, press it again.
+  {"bytes": 3798, "format": "binary", "packets": 633, "junk_bytes": 0, "x_range": [7147, 7153], "y_range": [4657, 4798], "b1_values": ["10000000", "11011100"], "b4_high_bits": ["0000"], "btn_field_values": [0, 23], "flag16_values": [false, true]}
+  80 37 6b 00 24 6e  b1=10000000 b4=00000000 x=  7147 y=  4718 btn= 0 16btn=0
+  80 37 6b 00 24 78  b1=10000000 b4=00000000 x=  7147 y=  4728 btn= 0 16btn=0
+  80 37 6b 00 24 73  b1=10000000 b4=00000000 x=  7147 y=  4723 btn= 0 16btn=0
+  80 37 6b 00 24 79  b1=10000000 b4=00000000 x=  7147 y=  4729 btn= 0 16btn=0
+  80 37 6b 00 24 79  b1=10000000 b4=00000000 x=  7147 y=  4729 btn= 0 16btn=0
+  80 37 6b 00 25 01  b1=10000000 b4=00000000 x=  7147 y=  4737 btn= 0 16btn=0
+  80 37 6b 00 24 79  b1=10000000 b4=00000000 x=  7147 y=  4729 btn= 0 16btn=0
+  80 37 6b 00 25 0a  b1=10000000 b4=00000000 x=  7147 y=  4746 btn= 0 16btn=0
+  ...
+  80 37 70 00 25 02  b1=10000000 b4=00000000 x=  7152 y=  4738 btn= 0 16btn=0
+  80 37 70 00 25 0a  b1=10000000 b4=00000000 x=  7152 y=  4746 btn= 0 16btn=0
+  80 37 70 00 25 07  b1=10000000 b4=00000000 x=  7152 y=  4743 btn= 0 16btn=0
+  80 37 70 00 24 54  b1=10000000 b4=00000000 x=  7152 y=  4692 btn= 0 16btn=0
+  80 37 70 00 24 5a  b1=10000000 b4=00000000 x=  7152 y=  4698 btn= 0 16btn=0
+  80 37 70 00 25 10  b1=10000000 b4=00000000 x=  7152 y=  4752 btn= 0 16btn=0
+  80 37 70 00 24 77  b1=10000000 b4=00000000 x=  7152 y=  4727 btn= 0 16btn=0
+  80 37 70 00 24 7f  b1=10000000 b4=00000000 x=  7152 y=  4735 btn= 0 16btn=0
+
+== puck_btn_8 ==
+Hold the PUCK still and press button '8'; hold it, release, press it again.
+  {"bytes": 2874, "format": "binary", "packets": 479, "junk_bytes": 0, "x_range": [7152, 7209], "y_range": [4627, 4788], "b1_values": ["10000000", "11101100"], "b4_high_bits": ["0000"], "btn_field_values": [0, 27], "flag16_values": [false, true]}
+  80 37 70 00 25 09  b1=10000000 b4=00000000 x=  7152 y=  4745 btn= 0 16btn=0
+  80 37 70 00 25 0b  b1=10000000 b4=00000000 x=  7152 y=  4747 btn= 0 16btn=0
+  80 37 70 00 24 79  b1=10000000 b4=00000000 x=  7152 y=  4729 btn= 0 16btn=0
+  80 37 70 00 24 68  b1=10000000 b4=00000000 x=  7152 y=  4712 btn= 0 16btn=0
+  80 37 70 00 24 7c  b1=10000000 b4=00000000 x=  7152 y=  4732 btn= 0 16btn=0
+  80 37 70 00 24 76  b1=10000000 b4=00000000 x=  7152 y=  4726 btn= 0 16btn=0
+  80 37 70 00 25 06  b1=10000000 b4=00000000 x=  7152 y=  4742 btn= 0 16btn=0
+  80 37 70 00 25 0a  b1=10000000 b4=00000000 x=  7152 y=  4746 btn= 0 16btn=0
+  ...
+  80 38 28 00 25 08  b1=10000000 b4=00000000 x=  7208 y=  4744 btn= 0 16btn=0
+  80 38 28 00 24 70  b1=10000000 b4=00000000 x=  7208 y=  4720 btn= 0 16btn=0
+  80 38 28 00 24 77  b1=10000000 b4=00000000 x=  7208 y=  4727 btn= 0 16btn=0
+  80 38 28 00 24 7f  b1=10000000 b4=00000000 x=  7208 y=  4735 btn= 0 16btn=0
+  80 38 28 00 24 5d  b1=10000000 b4=00000000 x=  7208 y=  4701 btn= 0 16btn=0
+  80 38 28 00 24 6b  b1=10000000 b4=00000000 x=  7208 y=  4715 btn= 0 16btn=0
+  80 38 28 00 24 6d  b1=10000000 b4=00000000 x=  7208 y=  4717 btn= 0 16btn=0
+  80 38 28 00 24 77  b1=10000000 b4=00000000 x=  7208 y=  4727 btn= 0 16btn=0

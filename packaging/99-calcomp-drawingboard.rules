@@ -1,0 +1,10 @@
+# CalComp DrawingBoard III on a Prolific PL2303 USB-serial adapter (067b:2303).
+# Starts calcomp-attach@<port>.service when the adapter appears, and keeps
+# ModemManager from probing the port (its AT commands confuse the tablet).
+#
+# This matches ANY PL2303 adapter: the adapter has no serial number to tell
+# two apart. If you use other PL2303 devices, plug the tablet's adapter into a
+# fixed USB port and add e.g. KERNELS=="1-5" (see: udevadm info -a -n /dev/ttyUSB0).
+
+SUBSYSTEM=="tty", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", \
+  ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="calcomp-attach@%k.service"

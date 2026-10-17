@@ -1,0 +1,156 @@
+# calcomp-menud layout for the CalComp DrawingBoard III 34180 (18" x 12").
+# Copy to ~/.config/calcomp/areas.toml. The daemon reloads it when it changes
+# (or on SIGHUP); a broken file is reported in the journal and ignored.
+#
+# All coordinates are tablet counts: 1000 per inch, origin at the TOP-LEFT of
+# the active area, x to the right, y down. Rectangles include x0/y0 and stop
+# just before x1/y1. `calcomp-menud measure` prints the counts under the tool.
+
+[tablet]
+device = "CalComp DrawingBoard III"   # evdev device name to grab
+width = 18000
+height = 12000
+
+# Ignore a second press on the same menu within this many ms (the pen can
+# report a short tip bounce).
+debounce_ms = 250
+
+# Mapped onto the whole screen. 13.6" x 5.7" = 2.39:1, the 2992x1253 screen's
+# shape, between the two faulty strips.
+[drawing]
+x0 = 2200
+y0 = 1000
+x1 = 15800
+y1 = 6700
+
+# Faulty parts of this tablet's sensing grid (found with tools/scan_bands.py).
+# Only used for warnings, `measure` and the overlay; nothing is mapped there.
+[[faulty]]
+x0 = 0
+y0 = 500
+x1 = 18000
+y1 = 1000
+
+[[faulty]]
+x0 = 0
+y0 = 6750
+x1 = 18000
+y1 = 8450
+
+# Menu buttons. Each has a rectangle and at most one action (a square with
+# neither keys nor command is a placeholder: a press does nothing):
+#   keys = "ctrl+shift+z"            a key combo (names from linux
+#                                    input-event-codes.h without KEY_, e.g.
+#                                    a, f5, enter, esc, delete, volumeup, plus
+#                                    aliases ctrl, shift, alt, altgr, super)
+#   keys = ["ctrl+a", "ctrl+c"]      several combos in a row
+#   command = "konsole"              a shell command (runs detached)
+# Optional:
+#   image = "icons/undo.svg"         picture on the printed overlay: PNG, JPEG
+#                                    or SVG; ~ and paths relative to this file
+#                                    work. It's embedded, so the PDF stands alone.
+#   label = "Text\nshown"            text on the printed overlay (default: the
+#                                    name; with an image, only if given)
+#   visible = false                  hide it: not printed, and its area does
+#                                    nothing (not checked for overlaps either)
+#   buttons = ["left"]               only these buttons trigger it (default:
+#                                    any). Names: left right middle side extra
+#                                    forward back task btn0..btn7. Pen tip =
+#                                    left, lower = middle, upper = right; puck
+#                                    0/1/2/3 = left/middle/side/right,
+#                                    4-7 = extra/forward/back/task, 8-F = btn0-7.
+#
+# Usable menu space on this tablet: the bottom region y 8500-12000
+# (18" x 3.5"), the side margins x 0-2200 and 15800-18000 within y 1000-6700,
+# and the top strip y 0-500. Keys are keycodes: the letter that arrives
+# follows your keyboard layout.
+
+# Bottom row: 1.25" squares with 0.25" gaps, starting 1" from the left.
+# Icons are from the Breeze theme (any icon or picture file works).
+[[menu]]
+name = "undo"
+image = "/usr/share/icons/breeze/actions/24/edit-undo.svg"
+label = "Undo"
+keys = "ctrl+z"
+x0 = 1000
+y0 = 9000
+x1 = 2250
+y1 = 10250
+
+[[menu]]
+name = "redo"
+image = "/usr/share/icons/breeze/actions/24/edit-redo.svg"
+label = "Redo"
+keys = "ctrl+shift+z"
+x0 = 2500
+y0 = 9000
+x1 = 3750
+y1 = 10250
+
+[[menu]]
+name = "copy"
+image = "/usr/share/icons/breeze/actions/24/edit-copy.svg"
+label = "Copy"
+keys = "ctrl+c"
+x0 = 4000
+y0 = 9000
+x1 = 5250
+y1 = 10250
+
+[[menu]]
+name = "paste"
+image = "/usr/share/icons/breeze/actions/24/edit-paste.svg"
+label = "Paste"
+keys = "ctrl+v"
+x0 = 5500
+y0 = 9000
+x1 = 6750
+y1 = 10250
+
+[[menu]]
+name = "save"
+image = "/usr/share/icons/breeze/actions/24/document-save.svg"
+label = "Save"
+keys = "ctrl+s"
+x0 = 7000
+y0 = 9000
+x1 = 8250
+y1 = 10250
+
+[[menu]]
+name = "terminal"
+image = "/usr/share/icons/breeze/apps/48/utilities-terminal.svg"
+label = "Konsole"
+command = "konsole"
+x0 = 14500
+y0 = 9000
+x1 = 15750
+y1 = 10250
+
+[[menu]]
+name = "screenshot"
+image = "/usr/share/icons/breeze/apps/48/spectacle.svg"
+label = "Screen-\nshot"
+command = "spectacle --region"
+x0 = 16000
+y0 = 9000
+x1 = 17250
+y1 = 10250
+
+# Side margins, e.g. modifier-free app keys left of the drawing area:
+# [[menu]]
+# name = "escape"
+# keys = "esc"
+# x0 = 300
+# y0 = 1200
+# x1 = 1900
+# y1 = 2400
+#
+# Top strip (y 0-500), e.g. desktop switching:
+# [[menu]]
+# name = "overview"
+# keys = "super+w"
+# x0 = 7000
+# y0 = 50
+# x1 = 11000
+# y1 = 450

@@ -1,0 +1,35 @@
+# Build output
+*.ko
+*.o
+*.mod
+*.mod.c
+*.cmd
+.*.cmd
+modules.order
+Module.symvers
+.tmp_versions/
+driver/test/test_proto
+driver/test/vectors.txt
+__pycache__/
+
+# Not redistributed: GTCO's copyrighted manuals (see docs/TABLET.md for
+# where to find them) and the old X.Org driver source used as a reference
+docs/*.pdf
+reference-xf86-input-calcomp/
+xf86-input-calcomp-*.tar.gz
+
+# Working files from development
+PROMPT.md
+PROTOCOL_SPEC.md
+
+# Raw captures: only the ones the tests and tools use are published
+captures/*
+!captures/20261016-200836.json
+!captures/20261016-200836.txt
+!captures/20261016-201619.json
+!captures/20261016-201619.txt
+!captures/20261016-204600.json
+!captures/20261016-204600.txt
+!captures/evtest-sweep.log
+!captures/gaps-20261017-024933.json
+!captures/README.md

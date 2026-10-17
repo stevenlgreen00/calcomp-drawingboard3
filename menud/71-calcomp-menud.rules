@@ -1,0 +1,17 @@
+# calcomp-menud: let the logged-in desktop user (not root) read the CalComp
+# DrawingBoard III input device and create virtual input devices.
+#
+# uaccess gives the user on the active seat an ACL on the node; it goes away
+# when they log out or switch away. Must sort before 73-seat-late.rules, which
+# applies the ACLs.
+
+# The driver's device (calcomp_drv, serio protocol 0xc0), and the daemon's own
+# virtual devices, so `evtest` / `libinput debug-events` work without sudo.
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="CalComp DrawingBoard III*", TAG+="uaccess"
+
+# Test devices (tests/live_test.py): readable, but hidden from libinput and so
+# from the desktop, so synthetic clicks and keys can't reach real windows.
+SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="CalComp DrawingBoard III test*", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+
+# /dev/uinput (many distros, and Steam's rules, already do this)
+KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"

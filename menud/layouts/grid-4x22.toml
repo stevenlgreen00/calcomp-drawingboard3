@@ -1,0 +1,801 @@
+# calcomp-menud layout for the CalComp DrawingBoard III 34180 (18" x 12").
+# Copy to ~/.config/calcomp/areas.toml. The daemon reloads it when it changes
+# (or on SIGHUP); a broken file is reported in the journal and ignored.
+#
+# All coordinates are tablet counts: 1000 per inch, origin at the TOP-LEFT of
+# the active area, x to the right, y down. Rectangles include x0/y0 and stop
+# just before x1/y1. `calcomp-menud measure` prints the counts under the tool.
+
+[tablet]
+device = "CalComp DrawingBoard III"   # evdev device name to grab
+width = 18000
+height = 12000
+
+# Ignore a second press on the same menu within this many ms (the pen can
+# report a short tip bounce).
+debounce_ms = 250
+
+# Mapped onto the whole screen. 13.6" x 5.7" = 2.39:1, the 2992x1253 screen's
+# shape, between the two faulty strips.
+[drawing]
+x0 = 2200
+y0 = 1000
+x1 = 15800
+y1 = 6700
+
+# Faulty parts of this tablet's sensing grid (found with tools/scan_bands.py).
+# Only used for warnings, `measure` and the overlay; nothing is mapped there.
+[[faulty]]
+x0 = 0
+y0 = 500
+x1 = 18000
+y1 = 1000
+
+[[faulty]]
+x0 = 0
+y0 = 6750
+x1 = 18000
+y1 = 8450
+
+# Menu buttons. Each has a rectangle and at most one action (a square with
+# neither keys nor command is a placeholder: a press does nothing):
+#   keys = "ctrl+shift+z"            a key combo (names from linux
+#                                    input-event-codes.h without KEY_, e.g.
+#                                    a, f5, enter, esc, delete, volumeup, plus
+#                                    aliases ctrl, shift, alt, altgr, super)
+#   keys = ["ctrl+a", "ctrl+c"]      several combos in a row
+#   command = "konsole"              a shell command (runs detached)
+# Optional:
+#   image = "icons/undo.svg"         picture on the printed overlay: PNG, JPEG
+#                                    or SVG; ~ and paths relative to this file
+#                                    work. It's embedded, so the PDF stands alone.
+#   label = "Text\nshown"            text on the printed overlay (default: the
+#                                    name; with an image, only if given)
+#   buttons = ["left"]               only these buttons trigger it (default:
+#                                    any). Names: left right middle side extra
+#                                    forward back task btn0..btn7. Pen tip =
+#                                    left, lower = middle, upper = right; puck
+#                                    0/1/2/3 = left/middle/side/right,
+#                                    4-7 = extra/forward/back/task, 8-F = btn0-7.
+#
+# Usable menu space on this tablet: the bottom region y 8500-12000
+# (18" x 3.5"), the side margins x 0-2200 and 15800-18000 within y 1000-6700,
+# and the top strip y 0-500. Keys are keycodes: the letter that arrives
+# follows your keyboard layout.
+
+# 4 rows x 22 buttons across the bottom region: 0.625" squares with
+# 0.125" gaps (half the size and half the gap of the example layout),
+# x 812-17187, y 8800-11675, between the lower faulty
+# strip (ends ~8450) and the bottom edge (12000). Squares are named and
+# labelled "row,col" (1-based, row 1 at the top). Row 1, columns 1-8 hold the
+# edit commands; the rest are placeholders with no action (pressing them does
+# nothing): add keys = "..." or command = "...", and a label/image if you like.
+# visible = false hides a square: not printed, and its area does nothing.
+
+# --- row 1 (y 8800-9425) ---
+
+[[menu]]
+name = "undo"
+label = "Undo"
+image = "/usr/share/icons/breeze/actions/24/edit-undo.svg"
+keys = "ctrl+z"
+x0 = 812
+y0 = 8800
+x1 = 1437
+y1 = 9425
+
+[[menu]]
+name = "redo"
+label = "Redo"
+image = "/usr/share/icons/breeze/actions/24/edit-redo.svg"
+keys = "ctrl+shift+z"
+x0 = 1562
+y0 = 8800
+x1 = 2187
+y1 = 9425
+
+[[menu]]
+name = "cut"
+label = "Cut"
+image = "/usr/share/icons/breeze/actions/24/edit-cut.svg"
+keys = "ctrl+x"
+x0 = 2312
+y0 = 8800
+x1 = 2937
+y1 = 9425
+
+[[menu]]
+name = "copy"
+label = "Copy"
+image = "/usr/share/icons/breeze/actions/24/edit-copy.svg"
+keys = "ctrl+c"
+x0 = 3062
+y0 = 8800
+x1 = 3687
+y1 = 9425
+
+[[menu]]
+name = "paste"
+label = "Paste"
+image = "/usr/share/icons/breeze/actions/24/edit-paste.svg"
+keys = "ctrl+v"
+x0 = 3812
+y0 = 8800
+x1 = 4437
+y1 = 9425
+
+[[menu]]
+name = "select-all"
+label = "All"
+image = "/usr/share/icons/breeze/actions/24/edit-select-all.svg"
+keys = "ctrl+a"
+x0 = 4562
+y0 = 8800
+x1 = 5187
+y1 = 9425
+
+[[menu]]
+name = "delete"
+label = "Delete"
+image = "/usr/share/icons/breeze/actions/24/edit-delete.svg"
+keys = "delete"
+x0 = 5312
+y0 = 8800
+x1 = 5937
+y1 = 9425
+
+[[menu]]
+name = "find"
+label = "Find"
+image = "/usr/share/icons/breeze/actions/24/edit-find.svg"
+keys = "ctrl+f"
+x0 = 6062
+y0 = 8800
+x1 = 6687
+y1 = 9425
+
+[[menu]]
+name = "1,9"
+label = "(1,9)"
+x0 = 6812
+y0 = 8800
+x1 = 7437
+y1 = 9425
+
+[[menu]]
+name = "1,10"
+label = "(1,10)"
+x0 = 7562
+y0 = 8800
+x1 = 8187
+y1 = 9425
+
+[[menu]]
+name = "1,11"
+label = "(1,11)"
+x0 = 8312
+y0 = 8800
+x1 = 8937
+y1 = 9425
+
+[[menu]]
+name = "1,12"
+label = "(1,12)"
+x0 = 9062
+y0 = 8800
+x1 = 9687
+y1 = 9425
+
+[[menu]]
+name = "1,13"
+label = "(1,13)"
+x0 = 9812
+y0 = 8800
+x1 = 10437
+y1 = 9425
+
+[[menu]]
+name = "1,14"
+label = "(1,14)"
+x0 = 10562
+y0 = 8800
+x1 = 11187
+y1 = 9425
+
+[[menu]]
+name = "1,15"
+label = "(1,15)"
+x0 = 11312
+y0 = 8800
+x1 = 11937
+y1 = 9425
+
+[[menu]]
+name = "1,16"
+label = "(1,16)"
+x0 = 12062
+y0 = 8800
+x1 = 12687
+y1 = 9425
+
+[[menu]]
+name = "1,17"
+label = "(1,17)"
+x0 = 12812
+y0 = 8800
+x1 = 13437
+y1 = 9425
+
+[[menu]]
+name = "1,18"
+label = "(1,18)"
+x0 = 13562
+y0 = 8800
+x1 = 14187
+y1 = 9425
+
+[[menu]]
+name = "1,19"
+label = "(1,19)"
+x0 = 14312
+y0 = 8800
+x1 = 14937
+y1 = 9425
+
+[[menu]]
+name = "1,20"
+label = "(1,20)"
+x0 = 15062
+y0 = 8800
+x1 = 15687
+y1 = 9425
+
+[[menu]]
+name = "1,21"
+label = "(1,21)"
+x0 = 15812
+y0 = 8800
+x1 = 16437
+y1 = 9425
+
+[[menu]]
+name = "1,22"
+label = "(1,22)"
+x0 = 16562
+y0 = 8800
+x1 = 17187
+y1 = 9425
+
+# --- row 2 (y 9550-10175) ---
+
+[[menu]]
+name = "2,1"
+label = "(2,1)"
+x0 = 812
+y0 = 9550
+x1 = 1437
+y1 = 10175
+
+[[menu]]
+name = "2,2"
+label = "(2,2)"
+x0 = 1562
+y0 = 9550
+x1 = 2187
+y1 = 10175
+
+[[menu]]
+name = "2,3"
+label = "(2,3)"
+x0 = 2312
+y0 = 9550
+x1 = 2937
+y1 = 10175
+
+[[menu]]
+name = "2,4"
+label = "(2,4)"
+x0 = 3062
+y0 = 9550
+x1 = 3687
+y1 = 10175
+
+[[menu]]
+name = "2,5"
+label = "(2,5)"
+x0 = 3812
+y0 = 9550
+x1 = 4437
+y1 = 10175
+
+[[menu]]
+name = "2,6"
+label = "(2,6)"
+x0 = 4562
+y0 = 9550
+x1 = 5187
+y1 = 10175
+
+[[menu]]
+name = "2,7"
+label = "(2,7)"
+x0 = 5312
+y0 = 9550
+x1 = 5937
+y1 = 10175
+
+[[menu]]
+name = "2,8"
+label = "(2,8)"
+x0 = 6062
+y0 = 9550
+x1 = 6687
+y1 = 10175
+
+[[menu]]
+name = "2,9"
+label = "(2,9)"
+x0 = 6812
+y0 = 9550
+x1 = 7437
+y1 = 10175
+
+[[menu]]
+name = "2,10"
+label = "(2,10)"
+x0 = 7562
+y0 = 9550
+x1 = 8187
+y1 = 10175
+
+[[menu]]
+name = "2,11"
+label = "(2,11)"
+x0 = 8312
+y0 = 9550
+x1 = 8937
+y1 = 10175
+
+[[menu]]
+name = "2,12"
+label = "(2,12)"
+x0 = 9062
+y0 = 9550
+x1 = 9687
+y1 = 10175
+
+[[menu]]
+name = "2,13"
+label = "(2,13)"
+x0 = 9812
+y0 = 9550
+x1 = 10437
+y1 = 10175
+
+[[menu]]
+name = "2,14"
+label = "(2,14)"
+x0 = 10562
+y0 = 9550
+x1 = 11187
+y1 = 10175
+
+[[menu]]
+name = "2,15"
+label = "(2,15)"
+x0 = 11312
+y0 = 9550
+x1 = 11937
+y1 = 10175
+
+[[menu]]
+name = "2,16"
+label = "(2,16)"
+x0 = 12062
+y0 = 9550
+x1 = 12687
+y1 = 10175
+
+[[menu]]
+name = "2,17"
+label = "(2,17)"
+x0 = 12812
+y0 = 9550
+x1 = 13437
+y1 = 10175
+
+[[menu]]
+name = "2,18"
+label = "(2,18)"
+x0 = 13562
+y0 = 9550
+x1 = 14187
+y1 = 10175
+
+[[menu]]
+name = "2,19"
+label = "(2,19)"
+x0 = 14312
+y0 = 9550
+x1 = 14937
+y1 = 10175
+
+[[menu]]
+name = "2,20"
+label = "(2,20)"
+x0 = 15062
+y0 = 9550
+x1 = 15687
+y1 = 10175
+
+[[menu]]
+name = "2,21"
+label = "(2,21)"
+x0 = 15812
+y0 = 9550
+x1 = 16437
+y1 = 10175
+
+[[menu]]
+name = "2,22"
+label = "(2,22)"
+x0 = 16562
+y0 = 9550
+x1 = 17187
+y1 = 10175
+
+# --- row 3 (y 10300-10925) ---
+
+[[menu]]
+name = "3,1"
+label = "(3,1)"
+x0 = 812
+y0 = 10300
+x1 = 1437
+y1 = 10925
+
+[[menu]]
+name = "3,2"
+label = "(3,2)"
+x0 = 1562
+y0 = 10300
+x1 = 2187
+y1 = 10925
+
+[[menu]]
+name = "3,3"
+label = "(3,3)"
+x0 = 2312
+y0 = 10300
+x1 = 2937
+y1 = 10925
+
+[[menu]]
+name = "3,4"
+label = "(3,4)"
+x0 = 3062
+y0 = 10300
+x1 = 3687
+y1 = 10925
+
+[[menu]]
+name = "3,5"
+label = "(3,5)"
+x0 = 3812
+y0 = 10300
+x1 = 4437
+y1 = 10925
+
+[[menu]]
+name = "3,6"
+label = "(3,6)"
+x0 = 4562
+y0 = 10300
+x1 = 5187
+y1 = 10925
+
+[[menu]]
+name = "3,7"
+label = "(3,7)"
+x0 = 5312
+y0 = 10300
+x1 = 5937
+y1 = 10925
+
+[[menu]]
+name = "3,8"
+label = "(3,8)"
+x0 = 6062
+y0 = 10300
+x1 = 6687
+y1 = 10925
+
+[[menu]]
+name = "3,9"
+label = "(3,9)"
+x0 = 6812
+y0 = 10300
+x1 = 7437
+y1 = 10925
+
+[[menu]]
+name = "3,10"
+label = "(3,10)"
+x0 = 7562
+y0 = 10300
+x1 = 8187
+y1 = 10925
+
+[[menu]]
+name = "3,11"
+label = "(3,11)"
+x0 = 8312
+y0 = 10300
+x1 = 8937
+y1 = 10925
+
+[[menu]]
+name = "3,12"
+label = "(3,12)"
+x0 = 9062
+y0 = 10300
+x1 = 9687
+y1 = 10925
+
+[[menu]]
+name = "3,13"
+label = "(3,13)"
+x0 = 9812
+y0 = 10300
+x1 = 10437
+y1 = 10925
+
+[[menu]]
+name = "3,14"
+label = "(3,14)"
+x0 = 10562
+y0 = 10300
+x1 = 11187
+y1 = 10925
+
+[[menu]]
+name = "3,15"
+label = "(3,15)"
+x0 = 11312
+y0 = 10300
+x1 = 11937
+y1 = 10925
+
+[[menu]]
+name = "3,16"
+label = "(3,16)"
+x0 = 12062
+y0 = 10300
+x1 = 12687
+y1 = 10925
+
+[[menu]]
+name = "3,17"
+label = "(3,17)"
+x0 = 12812
+y0 = 10300
+x1 = 13437
+y1 = 10925
+
+[[menu]]
+name = "3,18"
+label = "(3,18)"
+x0 = 13562
+y0 = 10300
+x1 = 14187
+y1 = 10925
+
+[[menu]]
+name = "3,19"
+label = "(3,19)"
+x0 = 14312
+y0 = 10300
+x1 = 14937
+y1 = 10925
+
+[[menu]]
+name = "3,20"
+label = "(3,20)"
+x0 = 15062
+y0 = 10300
+x1 = 15687
+y1 = 10925
+
+[[menu]]
+name = "3,21"
+label = "(3,21)"
+x0 = 15812
+y0 = 10300
+x1 = 16437
+y1 = 10925
+
+[[menu]]
+name = "3,22"
+label = "(3,22)"
+x0 = 16562
+y0 = 10300
+x1 = 17187
+y1 = 10925
+
+# --- row 4 (y 11050-11675) ---
+
+[[menu]]
+name = "4,1"
+label = "(4,1)"
+x0 = 812
+y0 = 11050
+x1 = 1437
+y1 = 11675
+
+[[menu]]
+name = "4,2"
+label = "(4,2)"
+x0 = 1562
+y0 = 11050
+x1 = 2187
+y1 = 11675
+
+[[menu]]
+name = "4,3"
+label = "(4,3)"
+x0 = 2312
+y0 = 11050
+x1 = 2937
+y1 = 11675
+
+[[menu]]
+name = "4,4"
+label = "(4,4)"
+x0 = 3062
+y0 = 11050
+x1 = 3687
+y1 = 11675
+
+[[menu]]
+name = "4,5"
+label = "(4,5)"
+x0 = 3812
+y0 = 11050
+x1 = 4437
+y1 = 11675
+
+[[menu]]
+name = "4,6"
+label = "(4,6)"
+x0 = 4562
+y0 = 11050
+x1 = 5187
+y1 = 11675
+
+[[menu]]
+name = "4,7"
+label = "(4,7)"
+x0 = 5312
+y0 = 11050
+x1 = 5937
+y1 = 11675
+
+[[menu]]
+name = "4,8"
+label = "(4,8)"
+x0 = 6062
+y0 = 11050
+x1 = 6687
+y1 = 11675
+
+[[menu]]
+name = "4,9"
+label = "(4,9)"
+x0 = 6812
+y0 = 11050
+x1 = 7437
+y1 = 11675
+
+[[menu]]
+name = "4,10"
+label = "(4,10)"
+x0 = 7562
+y0 = 11050
+x1 = 8187
+y1 = 11675
+
+[[menu]]
+name = "4,11"
+label = "(4,11)"
+x0 = 8312
+y0 = 11050
+x1 = 8937
+y1 = 11675
+
+[[menu]]
+name = "4,12"
+label = "(4,12)"
+x0 = 9062
+y0 = 11050
+x1 = 9687
+y1 = 11675
+
+[[menu]]
+name = "4,13"
+label = "(4,13)"
+x0 = 9812
+y0 = 11050
+x1 = 10437
+y1 = 11675
+
+[[menu]]
+name = "4,14"
+label = "(4,14)"
+x0 = 10562
+y0 = 11050
+x1 = 11187
+y1 = 11675
+
+[[menu]]
+name = "4,15"
+label = "(4,15)"
+x0 = 11312
+y0 = 11050
+x1 = 11937
+y1 = 11675
+
+[[menu]]
+name = "4,16"
+label = "(4,16)"
+x0 = 12062
+y0 = 11050
+x1 = 12687
+y1 = 11675
+
+[[menu]]
+name = "4,17"
+label = "(4,17)"
+x0 = 12812
+y0 = 11050
+x1 = 13437
+y1 = 11675
+
+[[menu]]
+name = "4,18"
+label = "(4,18)"
+x0 = 13562
+y0 = 11050
+x1 = 14187
+y1 = 11675
+
+[[menu]]
+name = "4,19"
+label = "(4,19)"
+x0 = 14312
+y0 = 11050
+x1 = 14937
+y1 = 11675
+
+[[menu]]
+name = "4,20"
+label = "(4,20)"
+x0 = 15062
+y0 = 11050
+x1 = 15687
+y1 = 11675
+
+[[menu]]
+name = "4,21"
+label = "(4,21)"
+x0 = 15812
+y0 = 11050
+x1 = 16437
+y1 = 11675
+
+[[menu]]
+name = "4,22"
+label = "(4,22)"
+x0 = 16562
+y0 = 11050
+x1 = 17187
+y1 = 11675

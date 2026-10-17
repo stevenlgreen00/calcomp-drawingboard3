@@ -1,0 +1,18 @@
+# Attaches a CalComp DrawingBoard III on a serial port to the calcomp_drv driver.
+# Started by udev (99-calcomp-drawingboard.rules) when the adapter appears, as
+# calcomp-attach@ttyUSB0.service, and stopped when it is unplugged.
+
+[Unit]
+Description=CalComp DrawingBoard III tablet on /dev/%I
+BindsTo=dev-%i.device
+After=dev-%i.device
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/sbin/modprobe serport
+ExecStart=/usr/local/sbin/calcomp-attach /dev/%I
+Restart=on-failure
+RestartSec=2
+
+# No [Install] section: udev starts it whenever the adapter is present,
+# including at boot.

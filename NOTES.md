@@ -680,3 +680,8 @@ first.
   skipped with a note. On the 4×22 Letter pages, page 1 gets 4 crosses (left
   gutter) and page 2 gets 2 (right side); the --full sheet gets all 4 corners.
   20 unit tests pass.
+- **Published (2026-10-17):** this folder is a git repo, pushed to
+  https://github.com/stevenlgreen00/calcomp-drawingboard3 (public, GPL-2.0).
+  .gitignore leaves out GTCO's PDFs, the X.Org reference source,
+  PROMPT/PROTOCOL_SPEC and most captures. New: docs/TABLET.md, docs/GUIDE.md,
+  README.md, captures/README.md, menud/layouts/grid-4x22.toml.

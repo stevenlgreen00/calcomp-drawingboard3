@@ -27,7 +27,7 @@ sudo apt install build-essential linux-headers-$(uname -r) dkms evtest libinput-
 Get the code:
 
 ```bash
-git clone https://github.com/<you>/calcomp-drawingboard3.git
+git clone https://github.com/stevenlgreen00/calcomp-drawingboard3.git
 ```
 
 ```bash

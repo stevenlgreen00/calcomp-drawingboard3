@@ -109,7 +109,9 @@ light** is on in configuration mode.
 The tablet's serial cable carries the RS-232 lines plus a power-jack junction
 for the wall supply. A modern PC needs a **USB-to-RS-232 adapter**. This
 project was developed with a Prolific PL2303 adapter (USB ID `067b:2303`),
-which appears as `/dev/ttyUSB0`.
+which appears as `/dev/ttyUSB0`. It later started dropping off USB every hour
+or two (a clean disconnect with no errors, and gone until power-cycled), so an
+FTDI-based adapter (FT232R or FT231X) is the safer choice.
 
 - Linux's ModemManager probes new serial ports with AT commands, which can
   confuse the tablet. Tell it to ignore the adapter

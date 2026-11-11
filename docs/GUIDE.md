@@ -13,9 +13,10 @@ For what the tablet is and how it talks, see [TABLET.md](TABLET.md).
   cable (the one with the power-jack junction).
 - **A pointing tool:** a pen and/or a 4- or 16-button puck, with fresh batteries
   if cordless (pen: two 393 cells; puck: two AAA).
-- **A USB-to-RS-232 adapter.** This project used a Prolific PL2303 (`067b:2303`).
-  Others should work, but the udev rule in `packaging/` matches the PL2303's
-  ID, so edit it for a different adapter.
+- **A USB-to-RS-232 adapter.** An FTDI-based one (FT232R, `0403:6001`, or
+  FT231X, `0403:6015`) is recommended. This project started on a Prolific PL2303
+  (`067b:2303`), which kept locking up and dropping off USB. The udev rule in
+  `packaging/` recognises all three; for another chip, add its USB ID.
 - **Linux** with kernel headers and build tools. Tested on Debian 13, kernel
   7.2, KDE Plasma 6.3 on Wayland, libinput 1.28. Nothing here is
   KDE-specific, except the notes on KDE's tablet settings.

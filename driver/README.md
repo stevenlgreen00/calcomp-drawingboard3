@@ -109,7 +109,8 @@ This sets up:
   `install.sh --no-dkms` and re-run it after every kernel update.
 - **`/usr/local/sbin/calcomp-attach`**, the attach helper.
 - **`calcomp-attach@.service`**: a udev rule starts `calcomp-attach@ttyUSB0`
-  whenever the PL2303 adapter appears, at boot or on hot-plug, and systemd stops
+  whenever a supported USB-serial adapter appears (PL2303, FTDI FT232R or
+  FT231X), at boot or on hot-plug, and systemd stops
   it when the adapter is unplugged. The same rule stops ModemManager from
   probing the port.
 - **`serport`** loads at boot (`/etc/modules-load.d/`).
@@ -135,9 +136,16 @@ options calcomp_drv prox_timeout_ms=200
 
 To remove everything: `sudo ../packaging/uninstall.sh`.
 
-The udev rule matches **any** PL2303 adapter, because the adapter has no
-serial number. If you use other PL2303 devices, restrict the rule to a USB
-port as described in `packaging/99-calcomp-drawingboard.rules`.
+The udev rule matches **any** adapter with one of those chips. If you use
+other devices with the same chip (FTDI chips are common), pin the rule to the
+tablet's adapter: by serial number for FTDI, by USB port for PL2303. Both are
+described in `packaging/99-calcomp-drawingboard.rules`.
+
+**A PL2303 adapter that drops off USB** after an hour or two, with a clean
+`USB disconnect` and no errors in `journalctl -k`, and that doesn't come back
+until it's replugged, is a known failure of cheap (often clone) PL2303 chips.
+Software can't revive it, because ordinary ports can't cut its power. Use an FTDI
+adapter instead.
 
 ## Module parameters
 
@@ -294,7 +302,8 @@ and a pen's `BTN_RIGHT`/`BTN_MIDDLE` are ignored. Details:
   re-attach.
 - **Garbage right after plugging the adapter in:** ModemManager may be
   probing the port. Re-attach, or tell ModemManager to ignore the adapter with
-  a udev rule (`ENV{ID_MM_DEVICE_IGNORE}="1"` for 067b:2303).
+  a udev rule (`ENV{ID_MM_DEVICE_IGNORE}="1"`; the packaged rule already
+  does this for the supported adapters).
 
 ## Files
 

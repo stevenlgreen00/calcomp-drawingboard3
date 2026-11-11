@@ -382,6 +382,64 @@ buttons).
   it's reported. The live path (root) is untested; device lookup and the
   EVIOCGABS constant (0x80184541) were checked.
 
+## USB adapter dropout (2026-10-18)
+- The tablet stopped controlling the pointer because the PL2303 adapter had
+  left the USB bus at 2026-10-17 09:50:53: no lsusb entry, no /dev/ttyUSB0,
+  and the menu daemon logged "tablet gone: [Errno 19]" and waited. The driver
+  and calcomp-menud were fine. **A physical replug fixed it**: the attach
+  service, driver setup and menud re-grab all recovered on their own. The cause
+  is unknown (loose cable or connector, hub, or the port). If it recurs, check
+  `sudo dmesg` for the disconnect reason, and try a direct port.
+
+## Dropout caught in the kernel log (2026-11-11, captures/drop-20261111.log)
+- On the rear port (usb3-port5, another xHCI controller): attached 07:05:02,
+  driver up 07:09:14, then **`08:31:13 usb 3-5: USB disconnect`**, followed
+  only by the pl2303 driver noting it's gone. **No errors before it** (no -71,
+  reset, over-current or transfer failures), and no re-enumeration afterwards.
+- So the adapter itself drops its USB connection and stays off until a power
+  cut. That happened on two ports and two controllers. Suspects: the
+  (probably clone) PL2303 latching up, or something electrical from the
+  tablet side (its PSU plugs into the serial cable's connector).
+- **Recommendation:** replace the adapter with an FTDI-based one (FT232R or
+  FT231X). Add its IDs (0403:6001 / 0403:6015) to the udev rule. If an FTDI
+  adapter also drops, suspect the tablet's power supply.
+
+## Kernel update broke the driver: missing headers (2026-11-11)
+- After moving the adapter to a rear port (now usb3-port5) it enumerated fine
+  and calcomp-attach@ttyUSB0 created serio0 (proto c0), but **no driver bound**.
+  The running kernel was **7.2.11+deb13** (backports, pulled in by
+  `linux-image-amd64`); DKMS had calcomp_drv only for 7.2.6, because
+  **`linux-headers-amd64` wasn't installed**, so no headers came with the new
+  kernel and DKMS couldn't build.
+- **Fix given:** `sudo apt install -t trixie-backports linux-headers-$(uname -r)
+  linux-headers-amd64` (DKMS builds on header install; the metapackage keeps
+  future backports kernels covered; backports already had 7.2.12), then
+  `sudo modprobe calcomp_drv` to bind the waiting serio port. **Done and verified
+  07:09:** dkms status shows calcomp_drv for 7.2.6, 7.2.11 (running) and 7.2.12
+  (next), linux-headers-amd64 7.2.12-1~bpo13+1 is installed, and the tablet
+  device is back alongside menud's virtual devices.
+- **For other users / README:** install the headers *metapackage* matching the
+  kernel metapackage's suite, or DKMS silently stops covering new kernels.
+
+## Repeated adapter dropouts (2026-11-11)
+- calcomp-menud's log shows the PL2303 vanishing 6 times since Oct 17, and
+  only coming back after a replug or reboot: 09:39→09:50 Oct 17, 12:13→14:45
+  Oct 18, 19:17→20:54 Oct 26, 17:06→18:10 Oct 29, 17:02→18:06 Oct 30 (two of
+  them exactly about 64 min after attach). On 2026-11-11 it was plugged in but
+  absent since Oct 30: usb1-port5 `state=not attached`.
+- **Port off/on (`usb1-port5/disable` 1→0) does not revive it.** The port
+  still sees nothing, so the adapter is hung hard enough to drop off the bus
+  and needs a power cut (replug). PC ports can't cut VBUS from software, so
+  automatic recovery would need a hub with per-port power switching (uhubctl)
+  plus a watchdog.
+- Kernel journal: no usb 1-5/pl2303 entries left for Oct 17–30 (rotated). The
+  only hits are Nov 3, a different hub (usb 3-4): disconnects and `can't set
+  config #1, error -71` (EPROTO), i.e. USB on this machine sometimes misbehaves
+  electrically.
+- **Advice given:** move the adapter to a rear motherboard port; if it still
+  drops, replace it (FTDI FT232R preferred; add its ID to the udev rule). Next
+  time, run `sudo journalctl -k ...` *before* replugging to catch the reason.
+
 ## Reboot (2026-10-17)
 - **Verified:** after a full system reboot the digitizer came back up
   automatically. udev coldplug started calcomp-attach@ttyUSB0, and the DKMS

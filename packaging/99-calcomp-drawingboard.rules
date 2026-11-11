@@ -1,10 +1,26 @@
-# CalComp DrawingBoard III on a Prolific PL2303 USB-serial adapter (067b:2303).
+# CalComp DrawingBoard III on a USB-serial adapter.
 # Starts calcomp-attach@<port>.service when the adapter appears, and keeps
 # ModemManager from probing the port (its AT commands confuse the tablet).
 #
-# This matches ANY PL2303 adapter: the adapter has no serial number to tell
-# two apart. If you use other PL2303 devices, plug the tablet's adapter into a
-# fixed USB port and add e.g. KERNELS=="1-5" (see: udevadm info -a -n /dev/ttyUSB0).
+# Supported adapters:
+#   067b:2303  Prolific PL2303 (many cheap adapters; clones can lock up and
+#              drop off USB, see NOTES.md)
+#   0403:6001  FTDI FT232R  (recommended)
+#   0403:6015  FTDI FT231X / FT230X
+#
+# These match ANY adapter of that type. The tablet driver would take over
+# another device using the same chip (FTDI chips are common: Arduinos, serial
+# cables...). To limit it to the tablet's adapter:
+#   - FTDI adapters have a unique serial number: add ATTRS{serial}=="..." to the
+#     FTDI lines (find it with: udevadm info -a -n /dev/ttyUSB0 | grep serial)
+#   - PL2303 adapters have none: plug it into a fixed USB port and add e.g.
+#     KERNELS=="3-5" (see: udevadm info -a -n /dev/ttyUSB0)
 
 SUBSYSTEM=="tty", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="2303", \
+  ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="calcomp-attach@%k.service"
+
+SUBSYSTEM=="tty", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", \
+  ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="calcomp-attach@%k.service"
+
+SUBSYSTEM=="tty", KERNEL=="ttyUSB[0-9]*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6015", \
   ENV{ID_MM_DEVICE_IGNORE}="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="calcomp-attach@%k.service"
